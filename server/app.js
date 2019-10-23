@@ -43,9 +43,7 @@ app.post("/api/kittens/:id/hobbies", (req, res) => {
 });
 
 /**** Start ****/
-const url =
-  process.env.MONGO_URL ||
-  "mongodb+srv://marc:<password>@cluster0-onsms.azure.mongodb.net/test?retryWrites=true&w=majority";
+const url = process.env.MONGO_URL || "mongodb://localhost/kitten_db";
 mongoose
   .connect(url, { useNewUrlParser: true, useUnifiedTopology: true })
   .then(async () => {
