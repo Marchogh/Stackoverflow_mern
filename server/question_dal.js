@@ -7,7 +7,12 @@ class Db {
     // This is the schema we need to store questions in MongoDB
     const questionSchema = new mongoose.Schema({
       name: String,
-      comments: [String], // A list of comments as string
+      comments: [
+        {
+          text: String,
+          upvote: Number
+        }
+      ],
       date: {
         type: Date,
         default: Date.now
@@ -45,7 +50,7 @@ class Db {
   async addComment(questionId, comment) {
     // TODO: Error handling
     const question = await this.getQuestion(questionId);
-    question.comments.push(comment);
+    question.comments.push({ text: comment, upvote: 0 });
     return question.save();
   }
 
@@ -55,7 +60,7 @@ class Db {
    * @returns {Promise} Resolves when everything has been saved.
    */
   async bootstrap(count = 10) {
-    const comments = ["Comment 1", "Comment 2", "Comment 3", "Comment 4"];
+    const comments = [{ text: "Comment 1", upvote: 0 }];
     function getRandomInt(min, max) {
       return Math.floor(Math.random() * (max - min + 1) + min);
     }

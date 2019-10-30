@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import { Link } from "@reach/router";
+import PostQuestion from "./PostQuestion";
 
 class Questions extends Component {
   render() {
@@ -15,6 +16,7 @@ class Questions extends Component {
             </div>
           ))}
         </ol>
+        <PostQuestion />
       </>
     );
   }

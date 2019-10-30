@@ -77,7 +77,7 @@ a:link {
   padding: var(--padding-t);
 }
 
-.post-question {
+.post {
   display: flex;
   padding: var(--padding-t);
 }

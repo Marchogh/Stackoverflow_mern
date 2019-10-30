@@ -15,11 +15,13 @@ class Question extends Component {
           <ul>
             {question.comments.map(c => (
               <li className="comment" key={c}>
-                {c}
+                {c.name}
+                {c.text}
+                {c.upvote}
               </li>
             ))}
           </ul>
-          <div className="post-question">
+          <div className="post">
             <textarea rows="4" cols="50"></textarea>
             <button>Post Comment</button>
           </div>
