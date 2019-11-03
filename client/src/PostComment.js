@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 
-class PostQuestion extends Component {
+class PostComment extends Component {
   constructor(props) {
     super(props);
 
@@ -19,7 +19,7 @@ class PostQuestion extends Component {
   }
 
   onClick() {
-    this.props.postQuestion(this.state.input);
+    this.props.postComment(this.state.input);
   }
 
   render() {
@@ -27,11 +27,11 @@ class PostQuestion extends Component {
       <>
         <div className="post">
           <textarea rows="4" cols="50" onChange={this.onChange}></textarea>
-          <button onClick={this.onClick}>Post Question</button>
+          <button onClick={this.onClick}>Post Comment</button>
         </div>
       </>
     );
   }
 }
 
-export default PostQuestion;
+export default PostComment;

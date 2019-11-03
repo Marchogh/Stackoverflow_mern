@@ -75,9 +75,25 @@ a:link {
 
 .comment {
   padding: var(--padding-t);
+  border-bottom: var(--border);
+  padding-bottom: 10px;
+}
+
+.comment-name {
+  padding: 1rem 0;
 }
 
 .post {
   display: flex;
   padding: var(--padding-t);
+}
+
+.votes {
+  display: inline;
+  margin-right: 10px;
+}
+
+span {
+  font-size: 18px;
+  margin: 0 5px;
 }

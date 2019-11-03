@@ -11,12 +11,16 @@ class Questions extends Component {
           {this.props.questions.map(question => (
             <div key={question._id} className="question-list">
               <li>
-                <Link to={`/question/${question._id}`}>{question.name}</Link>
+                <Link to={`/question/${question._id}`}>
+                  {question.question}
+                </Link>
               </li>
             </div>
           ))}
         </ol>
-        <PostQuestion />
+        <PostQuestion
+          postQuestion={question => this.props.postQuestion(question)}
+        ></PostQuestion>
       </>
     );
   }

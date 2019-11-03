@@ -6,17 +6,13 @@ class Db {
   constructor(mongoose) {
     // This is the schema we need to store questions in MongoDB
     const questionSchema = new mongoose.Schema({
-      name: String,
+      question: String,
       comments: [
         {
           text: String,
-          upvote: Number
+          votes: Number
         }
-      ],
-      date: {
-        type: Date,
-        default: Date.now
-      }
+      ]
     });
 
     // This model is used in the methods of this class to access questions
@@ -47,11 +43,17 @@ class Db {
     return question.save();
   }
 
-  async addComment(questionId, comment) {
-    // TODO: Error handling
-    const question = await this.getQuestion(questionId);
-    question.comments.push({ text: comment, upvote: 0 });
-    return question.save();
+  async addComment(id, comment) {
+    const question = await this.getQuestion(id);
+    comment.votes = 0;
+    question.comments.push(comment);
+
+    try {
+      return question.save();
+    } catch (error) {
+      console.error("addComment:", error.message);
+      return {};
+    }
   }
 
   /**
@@ -60,7 +62,11 @@ class Db {
    * @returns {Promise} Resolves when everything has been saved.
    */
   async bootstrap(count = 10) {
-    const comments = [{ text: "Comment 1", upvote: 0 }];
+    const comments = [
+      { text: "Comment 1", votes: 0 },
+      { text: "Comment 2", votes: 5 },
+      { text: "Comment 3", votes: 8 }
+    ];
     function getRandomInt(min, max) {
       return Math.floor(Math.random() * (max - min + 1) + min);
     }
@@ -87,7 +93,7 @@ class Db {
 
       for (let i = 0; i < count; i++) {
         let question = new this.questionModel({
-          name: getRandomName(),
+          question: getRandomName(),
           comments: getRandomcomments()
         });
         promises.push(question.save());

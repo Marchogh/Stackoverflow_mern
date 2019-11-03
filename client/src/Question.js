@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import { Link } from "@reach/router";
+import PostComment from "./PostComment";
 
 class Question extends Component {
   render() {
@@ -9,22 +10,25 @@ class Question extends Component {
     if (question) {
       content = (
         <>
-          <h1 className="question-title">{question.name}</h1>
-
-          <h3>Comments</h3>
+          <h1 className="question-title">{question.question}</h1>
+          <h3>Comments:</h3>
           <ul>
             {question.comments.map(c => (
-              <li className="comment" key={c}>
-                {c.name}
-                {c.text}
-                {c.upvote}
-              </li>
+              <div key={c._id}>
+                <div className="comment">
+                  <p className="votes">Votes: {c.votes}</p>
+                  <button>
+                    <span>&uarr;</span>
+                  </button>
+                  <button>
+                    <span>&darr;</span>
+                  </button>
+                  <h3 className="comment-name">{c.text}</h3>
+                </div>
+              </div>
             ))}
           </ul>
-          <div className="post">
-            <textarea rows="4" cols="50"></textarea>
-            <button>Post Comment</button>
-          </div>
+          <PostComment postComment={question => this.postComment(question)} />
           <Link to="/">Back</Link>
         </>
       );

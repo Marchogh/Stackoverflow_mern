@@ -29,7 +29,7 @@ app.get("/api/questions/:id", (req, res) => {
 
 app.post("/api/questions", (req, res) => {
   let question = {
-    name: req.body.name,
+    question: req.body.question,
     comments: [] // Empty comment array
   };
   questionDAL
@@ -38,9 +38,8 @@ app.post("/api/questions", (req, res) => {
 });
 
 app.post("/api/questions/:id/comments", (req, res) => {
-  // To add a comment, you need the id of the question, and some comment text from the request body.
   questionDAL
-    .addComment(req.params.id, req.body.comment)
+    .addComment(req.params.id, req.body.text)
     .then(updatedquestion => res.json(updatedquestion));
 });
 
