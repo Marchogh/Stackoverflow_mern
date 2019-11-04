@@ -56,9 +56,19 @@ class Db {
     }
   }
 
+  getComment(question, commentId) {
+    try {
+      return question.comments.find(comment => comment._id == commentId);
+    } catch (error) {
+      console.error("getComment:", error.message);
+      return {};
+    }
+  }
+
   async vote(id, commentId) {
+    // TODO: Error handling
     const question = await this.getQuestion(id);
-    const comment = this.getAnswer(question, commentId);
+    const comment = this.getComment(question, commentId);
     comment.votes = comment.votes + 1;
 
     return question.save();

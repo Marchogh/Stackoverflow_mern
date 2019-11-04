@@ -26,6 +26,7 @@ class PostQuestion extends Component {
   render() {
     return (
       <>
+        <h2>Post Question</h2>
         <div className="post">
           <textarea
             id="input-question"

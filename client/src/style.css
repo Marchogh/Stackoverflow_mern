@@ -30,6 +30,10 @@ ul {
   font-weight: normal;
 }
 
+h2 {
+  margin-top: 25px;
+}
+
 ol,
 ul {
   list-style: none;
@@ -38,6 +42,12 @@ ul {
 img {
   max-width: 100%;
   height: auto;
+}
+
+button {
+  background: #000000;
+  border: none;
+  color: white;
 }
 
 a:link {
@@ -59,12 +69,18 @@ a:link {
 .question-wrapper {
   display: flex;
   justify-content: center;
-  padding: 50px;
+  padding: 35px 50px;
 }
 
 .question-list {
   padding: var(--padding-tb);
   border-bottom: var(--border);
+}
+
+.question-item {
+  padding: 1.5rem;
+  background: #05262c;
+  color: #fff;
 }
 
 .question-title {

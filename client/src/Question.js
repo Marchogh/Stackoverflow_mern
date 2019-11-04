@@ -3,6 +3,17 @@ import { Link } from "@reach/router";
 import PostComment from "./PostComment";
 
 class Question extends Component {
+  constructor(props) {
+    super(props);
+    this.handleVote = this.handleVote.bind(this);
+  }
+
+  handleVote(e) {
+    let commentId = e.currentTarget.dataset.id;
+    //console.log(answerId);
+    this.props.handleVote(this.props.id, commentId);
+  }
+
   render() {
     const question = this.props.getquestion(this.props.id);
 
@@ -17,7 +28,12 @@ class Question extends Component {
               <div key={c._id}>
                 <div className="comment">
                   <p className="votes">Votes: {c.votes}</p>
-                  <button>
+                  <button
+                  // Not working: Error: 'comment' is not defined  no-undef
+                  /* onClick={() =>
+                      this.props.handleVote(this.props.id, comment._id)
+                    } */
+                  >
                     <span>&uarr;</span>
                   </button>
                   <button>

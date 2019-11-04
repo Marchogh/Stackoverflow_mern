@@ -49,7 +49,7 @@ app.post("/api/questions/:id/comments", (req, res) => {
 // Update votes
 app.put("/api/questions/:id/comments/:commentId/vote", (req, res) => {
   questionDAL
-    .vote(req.params.id, req.params.commentsId)
+    .vote(req.params.id, req.params.commentId)
     .then(updatedvote => res.json(updatedvote));
 });
 

@@ -75,11 +75,29 @@ class App extends Component {
       }
     })
       .then(response => response.json())
-      .then(json => {
-        console.log("Result of posting a new comment:");
-        console.log(json);
+      .then(() => {
         this.getData();
       });
+  }
+
+  // Not working - Ther API is working so a PUT call will work.
+  async vote(id, commentId) {
+    let url = `${this.API_URL}/questions/${id}/comments/${commentId}/vote`;
+    fetch(url, {
+      method: "PUT",
+      headers: {
+        "Content-type": "application/json; charset=UTF-8"
+      }
+    })
+      .then(response => response.json())
+      .then(() => {
+        this.getData();
+      });
+  }
+
+  // Not working
+  handleVote(id, commentId) {
+    this.vote(id, commentId);
   }
 
   render() {
@@ -93,6 +111,7 @@ class App extends Component {
             <Question
               path="/question/:id"
               getquestion={id => this.getQuestion(id)}
+              handleVote={(id, commentId) => this.handleVote(id, commentId)}
               postComment={(id, text) => this.postComment(id, text)}
             />
             <Questions
