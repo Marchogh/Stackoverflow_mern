@@ -19,13 +19,14 @@ class App extends Component {
 
   componentDidMount() {
     // Get everything from the API
-    this.getQuestions();
+    this.getData();
   }
 
-  async getQuestions() {
+  async getData() {
     let url = `${this.API_URL}/questions`; // URL of the API.
     let result = await fetch(url); // Get the data
     let json = await result.json(); // Turn it into json
+
     return this.setState({
       // Set it in the state
       questions: json
@@ -53,20 +54,21 @@ class App extends Component {
       headers: {
         "Content-type": "application/json"
       }
-    }).then(res => res.json());
-
-    window.location = "/";
+    })
+      .then(res => res.json())
+      .then(() => {
+        this.getData();
+      });
   }
 
   // post new comments
-  postComment(id, question) {
-    let url = `${this.API_URL}/questions/`.concat(id).concat("/comments");
+  postComment(id, text) {
+    let url = `${this.API_URL}/questions/${id}/comments/`;
 
     fetch(url, {
       method: "POST",
       body: JSON.stringify({
-        question: question
-        //answers:[]
+        text: text
       }),
       headers: {
         "Content-type": "application/json; charset=UTF-8"
@@ -74,7 +76,7 @@ class App extends Component {
     })
       .then(response => response.json())
       .then(json => {
-        console.log("Result of posting a new answer:");
+        console.log("Result of posting a new comment:");
         console.log(json);
         this.getData();
       });
@@ -91,6 +93,7 @@ class App extends Component {
             <Question
               path="/question/:id"
               getquestion={id => this.getQuestion(id)}
+              postComment={(id, text) => this.postComment(id, text)}
             />
             <Questions
               path="/"

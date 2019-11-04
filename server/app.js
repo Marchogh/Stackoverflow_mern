@@ -22,11 +22,13 @@ app.get("/api/questions", (req, res) => {
   questionDAL.getQuestions().then(questions => res.json(questions));
 });
 
+// Get question
 app.get("/api/questions/:id", (req, res) => {
   let id = req.params.id;
   questionDAL.getQuestion(id).then(question => res.json(question));
 });
 
+// Post a new question
 app.post("/api/questions", (req, res) => {
   let question = {
     question: req.body.question,
@@ -37,10 +39,18 @@ app.post("/api/questions", (req, res) => {
     .then(newquestion => res.json(newquestion));
 });
 
+// Post a new comments
 app.post("/api/questions/:id/comments", (req, res) => {
   questionDAL
-    .addComment(req.params.id, req.body.text)
+    .addComment(req.params.id, req.body)
     .then(updatedquestion => res.json(updatedquestion));
+});
+
+// Update votes
+app.put("/api/questions/:id/comments/:commentId/vote", (req, res) => {
+  questionDAL
+    .vote(req.params.id, req.params.commentsId)
+    .then(updatedvote => res.json(updatedvote));
 });
 
 /**** Start ****/

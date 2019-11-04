@@ -28,7 +28,7 @@ class Question extends Component {
               </div>
             ))}
           </ul>
-          <PostComment postComment={question => this.postComment(question)} />
+          <PostComment postComment={(id, text) => this.postComment(id, text)} />
           <Link to="/">Back</Link>
         </>
       );

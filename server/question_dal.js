@@ -56,6 +56,14 @@ class Db {
     }
   }
 
+  async vote(id, commentId) {
+    const question = await this.getQuestion(id);
+    const comment = this.getAnswer(question, commentId);
+    comment.votes = comment.votes + 1;
+
+    return question.save();
+  }
+
   /**
    * This method adds a bunch of test data if the database is empty.
    * @param count The amount of questions to add.
