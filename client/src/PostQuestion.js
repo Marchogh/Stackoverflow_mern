@@ -20,7 +20,7 @@ class PostQuestion extends Component {
 
   onClick() {
     this.props.postQuestion(this.state.input);
-    document.getElementById("input-comment").value = "";
+    document.getElementById("input-question").value = "";
   }
 
   render() {
@@ -28,7 +28,7 @@ class PostQuestion extends Component {
       <>
         <div className="post">
           <textarea
-            id="input-comment"
+            id="input-question"
             rows="4"
             cols="50"
             onChange={this.onChange}

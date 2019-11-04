@@ -28,7 +28,10 @@ class Question extends Component {
               </div>
             ))}
           </ul>
-          <PostComment postComment={(id, text) => this.postComment(id, text)} />
+          <PostComment
+            id={this.props.id}
+            postComment={(id, text) => this.props.postComment(id, text)}
+          />
           <Link to="/">Back</Link>
         </>
       );
