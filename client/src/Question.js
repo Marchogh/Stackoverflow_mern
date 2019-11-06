@@ -10,7 +10,6 @@ class Question extends Component {
 
   handleVote(e) {
     let commentId = e.currentTarget.dataset.id;
-    //console.log(answerId);
     this.props.handleVote(this.props.id, commentId);
   }
 
@@ -29,10 +28,7 @@ class Question extends Component {
                 <div className="comment">
                   <p className="votes">Votes: {c.votes}</p>
                   <button
-                  // Not working: Error: 'comment' is not defined  no-undef
-                  /* onClick={() =>
-                      this.props.handleVote(this.props.id, comment._id)
-                    } */
+                    onClick={() => this.props.handleVote(this.props.id, c._id)}
                   >
                     <span>&uarr;</span>
                   </button>
